@@ -1,0 +1,5 @@
+[pytest]
+testpaths = tests
+markers =
+    integration: marks tests as integration tests (run during nightly regression)
+addopts = -v --tb=short --junitxml=reports/test-results.xml
