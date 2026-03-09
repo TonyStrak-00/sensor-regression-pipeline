@@ -39,9 +39,10 @@ class SensorReading:
     @classmethod
     def from_bytes(cls, data: bytes) -> "SensorReading":
         """Unpack binary data into a SensorReading (simulates firmware deserialization)."""
-        if len(data) < 18:
-            raise ValueError(f"Insufficient data: expected 18 bytes, got {len(data)}")
-        sensor_id, timestamp, value, status = struct.unpack("<BdfB", data[:18])
+        expected_size = struct.calcsize("<BdfB")
+        if len(data) < expected_size:
+            raise ValueError(f"Insufficient data: expected {expected_size} bytes, got {len(data)}")
+        sensor_id, timestamp, value, status = struct.unpack("<BdfB", data[:expected_size])
         return cls(
             sensor_id=sensor_id,
             timestamp=timestamp,

@@ -167,7 +167,7 @@ class BatteryManager:
 
     def _update_state(self):
         if self._pack.active_faults:
-            critical = {BatteryFault.OVER_VOLTAGE, BatteryFault.OVER_CURRENT, BatteryFault.OVER_TEMPERATURE}
+            critical = {BatteryFault.OVER_VOLTAGE, BatteryFault.UNDER_VOLTAGE, BatteryFault.OVER_CURRENT, BatteryFault.OVER_TEMPERATURE}
             if any(f in critical for f in self._pack.active_faults):
                 self._pack.state = BatteryState.FAULT
             elif BatteryFault.CELL_IMBALANCE in self._pack.active_faults:

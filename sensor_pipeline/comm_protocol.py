@@ -53,7 +53,7 @@ class ProtocolMessage:
         if data[-1] != cls.END_BYTE:
             raise ValueError(f"Invalid end byte: 0x{data[-1]:02X}")
 
-        msg_type, source_id, dest_id, seq, payload_len = struct.unpack(
+        _start, msg_type, source_id, dest_id, seq, payload_len = struct.unpack(
             "<BBBBBH", data[:7]
         )
 
